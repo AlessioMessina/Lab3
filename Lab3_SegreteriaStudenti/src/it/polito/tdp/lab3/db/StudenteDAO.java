@@ -60,6 +60,6 @@ public class StudenteDAO {
 	public void updateCds(Studente s) {}
 	public void updateCds(int matricola, String cds) {}
 	
-	public List<Studente> searchByCognome(String cognome) {}
+	public List<Studente> searchByCognome(String cognome) { return null ; }
 	//public List<Studente> searchByCognome(Studente s) {}
 }
