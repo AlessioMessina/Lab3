@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.polito.tdp.lab3.model.Corso;
 import it.polito.tdp.lab3.model.Studente;
 
 public class StudenteDAO {
@@ -85,10 +86,10 @@ public class StudenteDAO {
 			e.printStackTrace();
 		}
 
-		return true;
+		return false;
 	}
 
-	public void updateCds(Studente s) {
+	public boolean updateCds(Studente s) {
 		String sql = "UPDATE studente SET cds=? WHERE matricola=?;";
 
 		Connection conn = DBConnect.getConnection();
@@ -101,22 +102,28 @@ public class StudenteDAO {
 			st.setInt(2, s.getMatricola());
 
 			int n = st.executeUpdate();
+			
+			if(n==1)
+				return true ;
+			else
+				return false ;
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return false ;
 	}
 
-	public void updateCds(int matricola, String cds) {
+	public boolean updateCds(int matricola, String cds) {
 		Studente s = new Studente(matricola, null, null, cds);
-		updateCds(s);
+		return updateCds(s);
 	}
 
 	public List<Studente> searchByCognome(String cognome) {
 		Connection conn = DBConnect.getConnection();
 
-		String sql = "SELECT matricola, cognome, nome, CDS FROM studente WHERE cognome = ?;";
+		String sql = "SELECT matricola, cognome, nome, CDS FROM studente WHERE cognome = ? ORDER BY matricola ;";
 
 		List<Studente> result = new ArrayList<>() ;
 		
@@ -148,4 +155,8 @@ public class StudenteDAO {
 			return null;
 		}
 	}
+
+	public void fillFrequenta(Studente s) {}
+	
+	public void fillFrequenta(Studente s, List<Corso> corsi) {}
 }

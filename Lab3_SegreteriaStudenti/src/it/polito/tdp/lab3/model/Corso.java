@@ -1,5 +1,8 @@
 package it.polito.tdp.lab3.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Corso {
 	
 	private String codIns ;
@@ -7,12 +10,16 @@ public class Corso {
 	private String nome ;
 	private int pd ; // periodo didattico
 	
+	private List<Studente> iscritti ;
+ 	
 	public Corso(String codIns, int crediti, String nome, int pd) {
 		super();
 		this.codIns = codIns;
 		this.crediti = crediti;
 		this.nome = nome;
 		this.pd = pd;
+		
+		this.iscritti = new ArrayList<>() ;
 	}
 
 	public String getCodIns() {
@@ -45,6 +52,14 @@ public class Corso {
 
 	public void setPd(int pd) {
 		this.pd = pd;
+	}
+	
+	public void addIscritto(Studente s) {
+		this.iscritti.add(s) ;
+	}
+	
+	public List<Studente> getIscritti() {
+		return this.iscritti ;
 	}
 
 	@Override
